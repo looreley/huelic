@@ -40,12 +40,12 @@ export default function Navigation(){
                 options={{title:'Consejos'}}
                 />
                 <Tab.Screen 
-                name='search'
+                name='Search'
                 component={SearchStack}
                 options={{title:'Buscar'}}
                 />
                 <Tab.Screen 
-                name='collections'
+                name='Collections'
                 component={CollectionsStack}
                 options={{title:'Colecciones'}}
                 />
@@ -59,20 +59,20 @@ export default function Navigation(){
     let iconName
      
     switch(route.name){
-        case 'recipes':
-            iconName='home-outline'
+        case 'Recipes':
+           iconName='book'
             break
-        case 'favorites':
-            iconName='heart-outline'
+        case 'Favorites':
+            iconName= 'favorite'
             break
-        case 'tips':
-            iconName='compass-outline'
+        case 'Tips':
+            iconName='icecream'
             break
-        case 'search':
-            iconName='seeker-outline'
+        case 'Search':
+            iconName='settings'
             break
-        case 'collections':
-            iconName='star-outline'
+        case 'Collections':
+            iconName='apps'
             break
     }
     return(

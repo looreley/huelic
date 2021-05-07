@@ -8,7 +8,7 @@ const Stack = createStackNavigator()
      return(
          <Stack.Navigator>
              <Stack.Screen
-                 name=' favorites'
+                 name=' Favorites'
                  component={Favorites}
                  options={{title:'Favoritos'}}
              />

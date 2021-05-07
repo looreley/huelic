@@ -8,7 +8,7 @@ const Stack = createStackNavigator()
      return(
          <Stack.Navigator>
              <Stack.Screen
-                 name=' search'
+                 name=' Search'
                  component={Search}
                  options={{title:'Buscar'}}
              />
