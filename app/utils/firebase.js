@@ -1,12 +1,12 @@
  import firebase from 'firebase/app'
 
   const firebaseConfig = {
-    apiKey: "AIzaSyD51Rn3kBBZom5_YnkCU1IeamklSCRUQPc",
-    authDomain: "huelic.firebaseapp.com",
-    projectId: "huelic",
-    storageBucket: "huelic.appspot.com",
-    messagingSenderId: "724407829381",
-    appId: "1:724407829381:web:44845e670bb94303683aec"
+    apiKey: "AIzaSyCUgIb9bxQmjW_DZOYTzTY1pBUu5Hokirc",
+    authDomain: "huelic-7a178.firebaseapp.com",
+    projectId: "huelic-7a178",
+    storageBucket: "huelic-7a178.appspot.com",
+    messagingSenderId: "623501415798",
+    appId: "1:623501415798:web:c01d45bf2cce4c67b71657"
   }
 
   export const firebaseApp = firebase.initializeApp(firebaseConfig)
