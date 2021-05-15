@@ -57,5 +57,5 @@ const styles = StyleSheet.create({
      divider:{
          backgroundColor:'#ff0080',
          margin:40
-     }
+     },
 })
