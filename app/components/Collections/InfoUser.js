@@ -4,6 +4,7 @@ import {Avatar} from 'react-native-elements'
 import firebase from 'firebase'
 import * as permissions from 'expo-permissions'
 import * as ImagePicker from 'expo-image-picker'
+import  CollectionOption from '../Collections/CollectionOption'
 
 export default function Infouser(props) {
     const {userInfo: { uid, photoURL, displayName, email}, toastRef} = props
@@ -19,6 +20,7 @@ export default function Infouser(props) {
                 text2: 'Es necesario aceptar los permisos de galeria',
                 visibilityTime: 3000,  
             });
+
         } else {
             const result = await ImagePicker.launchImageLibraryAsync({
                 allowsEditing:true,
@@ -76,27 +78,28 @@ export default function Infouser(props) {
                 photoURL: response
             }
             await firebase.auth().currentUser.updateProfile(update)
-            console.log('Imagen actualidaza')
+            console.log('Imagen actualizada')
         })
     }
     return(
-        <View style={styles.viewUserInfo}>
-            <Avatar
-                title='IGR'
-                rounded
-                size='large'
-                onPress={changeAvatar}
-                containerStyle={styles.userInfoAvatar}
-                source={
-                    photoURL ? { uri:photoURL } : require('../../../assets/img/avatar.jpg')
+           <View style={styles.viewUserInfo}>
+                <Avatar
+                 title='IGR'
+                 rounded
+                 size='large'
+                 onPress={changeAvatar}
+                 containerStyle={styles.userInfoAvatar}
+                 source={
+                      photoURL ? { uri:photoURL } : require('../../../assets/img/avatar.jpg')
                 }
             />
             <View>
-                <Text style={styles.displayName}>
-                    {displayName ? displayName : 'Invitado'}
+                 <Text style={styles.displayName}>
+                      {displayName ? displayName : 'Invitado'}
                 </Text>
                 <Text> { email ? email : 'Entrada atravez po FB'}</Text>
             </View>
+            <CollectionOption/>
         </View>
 
     )
@@ -104,20 +107,20 @@ export default function Infouser(props) {
 }   
 const styles = StyleSheet.create({
     ViewUserInfo:{
-        alignItems:'center',
-        justifyContent:'center',
-        flexBasis:'row',
-        backgroundColor:'#F2F2F2',
+        alignItems:   'center',
+        justifyContent:  'center',
+        flexBasis: 'row',
+        backgroundColor: '#F2F2F2',
         paddingTop: 30,
         paddingBottom: 30
     },
     userInfoAvatar: {
         marginTop: 20,
-        backgroundColor:'#feebed',
+        backgroundColor: '#feebed',
     },
     displayName:{
-        fontWeight:'bold',
-        paddingBottom: 10,
+        fontWeight: 'bold',
+        paddingBottom: 30,
     }
 })
 

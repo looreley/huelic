@@ -32,19 +32,19 @@ export default function UserLoged(){
 }
     const styles = StyleSheet.create({
       viewUserInfo:{
-        minHeight:'200%' ,
+        minHeight:'100%' ,
         backgroundColor:'#feebed'
     },
     btnCloseSesion:{
-        marginTop: 30,
+        marginTop: 10,
         borderRadius: 0,
         backgroundColor:'#fbd8dc',
         borderTopColor: 1, 
         borderStartColor:'#feebed',
         borderBottomWidth: 1,
         borderBottomColor:'#feebed',
-        paddingTop: 30,
-        paddingBottom: 30
+        paddingTop: 10,
+        paddingBottom: 10
 
     },
     btnCloseSesionText:{

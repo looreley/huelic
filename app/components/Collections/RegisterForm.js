@@ -7,7 +7,7 @@ import {useNavigation} from '@react-navigation/native'
 
 
 
-export default function RegisterForma(props){
+export default function RegisterForm(props){
     const {toastRef} = props
     const [showPassword, setShowPassword] = useState(false)
     const [showRepeatPassword, setShowRepeatPassword] = useState(false)
@@ -142,16 +142,16 @@ function defaultFormValues(){
 
 const styles = StyleSheet.create({
     formContainer:{
-        marginTop:30
+        marginTop:10
     },
 
     inputForm:{
         width: '100%',
-        marginTop: 20
+        marginTop:10
     },
 
     bntContainerRegister:{
-        marginTop: 20,
+        marginTop: 10,
         width: '100%'
     }, 
 
