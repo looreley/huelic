@@ -1,13 +1,16 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {StyleSheet, View, Text } from 'react-native'
 import {Avatar} from 'react-native-elements'
 import firebase from 'firebase'
 import * as permissions from 'expo-permissions'
 import * as ImagePicker from 'expo-image-picker'
 import  CollectionOption from '../Collections/CollectionOption'
+import Loading from '../../components/Loading'
 
 export default function Infouser(props) {
-    const {userInfo: { uid, photoURL, displayName, email}, toastRef} = props
+    const {userInfo: { uid, photoURL, displayName, email}, userInfo ,toastRef, setreLoadUserInfo} = props
+    const [isLoading, setLoading] = useState(false)
+    //console.log('Si entra a info---------------------')
 
     const changeAvatar= async ()=>{
         const resultPermissions = await permissions.askAsync(permissions.CAMERA_ROLL)
@@ -17,7 +20,7 @@ export default function Infouser(props) {
                 type: 'info',
                 position: 'top',
                 text1: 'Password',
-                text2: 'Es necesario aceptar los permisos de galeria',
+                text2: 'Es necesario axeptar los permisos de galeria',
                 visibilityTime: 3000,  
             });
 
@@ -32,16 +35,19 @@ export default function Infouser(props) {
 
                     type: 'info',
                     position: 'top',
-                    text1: 'cancelled',
+                    text1: 'cancelied',
                     text2: 'No eligistes un avatar',
                     visibilityTime: 3000,  
 
                 });
             } else{
+                setLoading(true)
                 uploadImage(result.uri).then(()=>{
                     console.log('Imagen subida en firebase')
                     updatePhotoUrl()
+                    setLoading(false)
                 }).catch(()=>{
+                    setLoading(false)
                     toastRef.current.show({
 
                         type: 'error',
@@ -52,9 +58,9 @@ export default function Infouser(props) {
     
                     });
                 })
-                }
             }
         }
+    }
 
      const uploadImage = async (uri) => {
          console.log('*************** URI ****************')
@@ -68,48 +74,55 @@ export default function Infouser(props) {
          return ref.put(blob)   
      }
      const updatePhotoUrl = () =>{
-        firebase
-        .storage()
-        .ref(`avatar/${uid}`)
-        .getDownloadURL()
-        .then(async(response)=>{
-            console.log(response)
-            const update = {
-                photoURL: response
-            }
-            await firebase.auth().currentUser.updateProfile(update)
-            console.log('Imagen actualizada')
-        })
-    }
-    return(
-           <View style={styles.viewUserInfo}>
-                <Avatar
-                 title='IGR'
-                 rounded
-                 size='large'
-                 onPress={changeAvatar}
-                 containerStyle={styles.userInfoAvatar}
-                 source={
-                      photoURL ? { uri:photoURL } : require('../../../assets/img/avatar.jpg')
-                }
-            />
-            <View>
-                 <Text style={styles.displayName}>
-                      {displayName ? displayName : 'Invitado'}
-                </Text>
-                <Text> { email ? email : 'Entrada atravez po FB'}</Text>
-            </View>
-            <CollectionOption/>
-        </View>
+         firebase
+         .storage()
+         .ref(`avatar/${uid}`)
+         .getDownloadURL()
+         .then(async(response)=>{
+             console.log(response)
+             const update = {
+                 photoURL: response
+             }
 
+             await firebase.auth().currentUser.updateProfile(update)
+             setreLoadUserInfo(true)
+             console.log('Imagen actualizada')
+        
+         })
+     }
+
+    return(
+        <View>
+           <View style={styles.ViewUserInfo}>
+                <Avatar
+                    title='IGR'
+                    rounded
+                    size='large'
+                    onPress={changeAvatar}
+                    containerStyle={styles.userInfoAvatar}
+                    source={
+                        photoURL ? { uri:photoURL } : require('../../../assets/img/avatar.jpg')
+                    }
+                />
+                <View style={styles.viewInfo}>
+                     <Text style={styles.displayName}>{displayName ? displayName : 'Sin nombre definido'}</Text>
+                     <Text>{email ? email : 'Sin email definido'}</Text>
+                </View>
+            </View>
+            <CollectionOption userInfo={userInfo} setreLoadUserInfo={setreLoadUserInfo}/>
+            <Loading
+                isVisible={isLoading}
+                text={'Actualizando..'}
+            />
+        </View>
     )
-  
 }   
+
 const styles = StyleSheet.create({
     ViewUserInfo:{
-        alignItems:   'center',
-        justifyContent:  'center',
-        flexBasis: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
         backgroundColor: '#F2F2F2',
         paddingTop: 30,
         paddingBottom: 30
@@ -120,8 +133,16 @@ const styles = StyleSheet.create({
     },
     displayName:{
         fontWeight: 'bold',
-        paddingBottom: 30,
+        paddingBottom: 5,
+    },
+    viewInfo:{
+        paddingTop: 20,
+        paddingLeft:15
     }
 })
+
+
+
+    
 
     

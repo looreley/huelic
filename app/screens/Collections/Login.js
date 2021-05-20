@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View, ScrollView, Text, Image } from 'react-native'
 import { Divider } from 'react-native-elements'
 import {useNavigation} from '@react-navigation/native'
-
+import LoginForm from '../../components/Collections/LoginForm'
 export default function Login(){
    return(
      <ScrollView>
@@ -12,6 +12,7 @@ export default function Login(){
             style={styles.logo}
         />
         <View style={styles.viewContainer}>
+            <LoginForm/>
             <Text>Login Form</Text>
             <CreateCollections/> 
         </View>
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
      },
      linkRegister:{
          color: '#ff0080',
-         fontWeight:'bold'
+         fontWeight: 'bold'
         
      },
      divider:{

@@ -38,10 +38,10 @@ const styles = StyleSheet.create({
         marginBottom:40
     },
     title:{
-        fontWeigth:'bold',
+        fontWeight:'bold',
         fontSize:15,
         marginBottom:10,
-        textAling:'center'
+        textAlign: 'center'
     },
     description:{
         marginBottom:20,

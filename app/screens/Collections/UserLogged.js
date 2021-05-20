@@ -1,54 +1,53 @@
-import React, {useState,useRef,useEffect} from 'react'
-import {View, Text, StyleSheet } from 'react-native'
-import {Button} from 'react-native-elements'
-import Toast from 'react-native-toast-message'
+import React,{useState, useRef, useEffect} from 'react'
+import { Button } from 'react-native-elements'
+import { View, Text, StyleSheet, ScrollView, Image } from 'react-native'
 import firebase from 'firebase'
-import InfoUser from'../../components/Collections/InfoUser'
+import Infouser from '../../components/Collections/Infouser'
+import Toast from 'react-native-toast-message';
+//import Loading from '../../components/Loading'
 
-
-export default function UserLoged(){
-    const [userInfo, setUserInfo] = useState(null)
+export default function UserLogged(){
+    const [userInfo, sethUserInfo] = useState(null)
+    const [reloadUserInfo, setreLoadUserInfo] = useState(false)
     const toastRef = useRef()
-    useEffect(()=>{
+    useEffect( ()=>{
         (async()=>{
             const user = await firebase.auth().currentUser
-            setUserInfo(user)
-
+            sethUserInfo(user)
         })()
-    },[])    
+        setreLoadUserInfo(false)
+    }, [reloadUserInfo])
+
     return(
-        <View style={styles.viewUserInfo}>
-            {userInfo&&<InfoUser userInfo={userInfo} toastRef={toastRef}/>}            
-             <Text>collectionsOotions......</Text>
-            <Button 
-            title='Cerrar sesión'
-            buttonStyle={styles.btnCloseSesion}
-            titleStyle={styles.btnCloseSesionText}
-            onPress={()=>firebase.auth().signOut()}
-            />
+        <ScrollView>
+            <View>
+                {userInfo && (<Infouser userInfo={userInfo} toastRef={toastRef} setreLoadUserInfo={setreLoadUserInfo}/>)}
+                <Toast ref={toastRef}/>
+            </View>
+            <View style={styles.viewcontainer}>
+                <Button
+                    title='Cerrar sesión' 
+                    containerStyle={styles.btnContainer}
+                    buttonStyle={styles.btnRegister}
+                    onPress={()=>firebase.auth().signOut()}/>
+            </View>
             <Toast ref={toastRef}/>
-        </View>
+        </ScrollView>
     )
 }
-    const styles = StyleSheet.create({
-      viewUserInfo:{
-        minHeight:'100%' ,
-        backgroundColor:'#feebed'
-    },
-    btnCloseSesion:{
-        marginTop: 10,
-        borderRadius: 0,
-        backgroundColor:'#fbd8dc',
-        borderTopColor: 1, 
-        borderStartColor:'#feebed',
-        borderBottomWidth: 1,
-        borderBottomColor:'#feebed',
-        paddingTop: 10,
-        paddingBottom: 10
 
+const styles = StyleSheet.create({
+    btnContainer:{
+        marginTop: 20,
+        paddingTop:30,
+        width: '95%'
+        
     },
-    btnCloseSesionText:{
-        color: '#FF0080'
+    btnRegister:{
+        backgroundColor: '#FF0080'
+    },
+    viewcontainer:{
+        alignItems: 'center',
+        marginBottom: 20
     }
-
 })
