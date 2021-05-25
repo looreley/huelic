@@ -41,7 +41,7 @@ export default function ChangeEmailForm(props){
                 .auth()
                 .currentUser.updateEmail(newemail)
                 .then(()=>{
-                    console.log('Ta bien desde firebase')
+                    console.log('todo bien desde firebase')
                     setIsLoading(false)
                     setreLoadUserInfo(true)
                     setShowModal(false)

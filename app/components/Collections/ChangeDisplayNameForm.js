@@ -26,13 +26,13 @@ export default function ChangeDisplayNameForm(props){
                 .auth()
                 .currentUser.updateProfile(update) 
                 .then(()=>{
-                    console.log('bien desde firebase')
+                    console.log('todo bien desde firebase')
                     setIsLoading(false)
                     setreLoadUserInfo(true)
                     setShowModal(false)
                 })   
                 .catch(()=>{
-                    console.log('nada bin desde firebase')
+                    console.log('algo pasa desde firebase')
                     setIsLoading(false)
                 })    
         }

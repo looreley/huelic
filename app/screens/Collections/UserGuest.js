@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     btnstyle:{
-        backgroundColor:'#ff0080'
+        backgroundColor:'#FF0080'
     },
     btncontainer:{
         marginTop:20,

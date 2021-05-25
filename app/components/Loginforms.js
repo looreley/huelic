@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     }, 
 
     btnRegister:{
-        backgroundColor:'#00a680'
+        backgroundColor:'#FF0080'
     },
 
     iconRight:{

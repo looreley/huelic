@@ -54,7 +54,7 @@ export default function ChangePasswordForm(props){
                 })    
             }).catch(function(error) {
                 setIsLoading(false)
-                setErrorPass('La contraseña no es correcto')
+                setErrorPass('La contraseña  es incorrecta')
 
             });
             
